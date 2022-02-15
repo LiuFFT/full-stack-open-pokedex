@@ -24,6 +24,11 @@
   "keywords": [
     "fullstack-open"
   ],
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/cypress/"
+    ]
+  },
   "author": "Smartly.io",
   "license": "ISC",
   "bugs": {
