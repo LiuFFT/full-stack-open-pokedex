@@ -1,1 +1,1 @@
-web: npm run start-prdo
+web: npm run start-prod
