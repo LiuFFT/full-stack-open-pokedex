@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  a_test_job:
+  a_test_job: # test exercise16
     if: "! contains(toJSON(github.event.commits.*.message), '#skip')"
     runs-on: ubuntu-18.04
     steps:
