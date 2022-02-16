@@ -53,6 +53,7 @@ jobs:
           fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
             {
+              username: 'github-action-slack',
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `a new version deployed to https://fullstack-11-ci.herokuapp.com (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
