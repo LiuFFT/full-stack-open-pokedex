@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [ master ]
+    types: [ opened, synchronize ]
 
 jobs:
   simple_deployment_pipeline:
@@ -28,6 +31,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: heroku deploy
+        if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@master
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -36,3 +40,9 @@ jobs:
           healthcheck: "https://fullstack-11-ci.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
